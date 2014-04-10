@@ -163,6 +163,21 @@ if (isset($_POST["startProcess"])) {
                             $message .= "After compression file size: " . $upload->size . "<br/>";
 
                             // calculate compression rate
+
+                            if (strpos($download->size,'MB') !== false) {
+                                $sizeOrg = str_replace(" MB", "", $download->size);
+                                $sizeOrg = $sizeOrg / 0.0009765625;
+                            } else {
+                                $sizeOrg = str_replace(" KB", "", $download->size);
+                            }
+
+                            if (strpos($upload->size,'MB') !== false) {
+                                $sizeNew = str_replace(" MB", "", $upload->size);
+                                $sizeNew = $sizeNew / 0.0009765625;
+                            } else {
+                                $sizeNew = str_replace(" KB", "", $upload->size);
+                            }
+
                             $sizeOrg = str_replace(" KB", "", $download->size);
                             $sizeNew = str_replace(" KB", "", $upload->size);
                             $compression = (100 - (((float)$sizeNew / (float)$sizeOrg) * 100));

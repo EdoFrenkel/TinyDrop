@@ -2,7 +2,7 @@ TinyDrop
 ========
 
 # Optimize Unity3D Atlases automatically
-using PHP script with - Dropbox and TinyPNG API's
+TinyDrop is a PHP script which use Dropbox API and TinyPNG API to optimize automatically your Unity3D atlases
 
 ## Installation
 1. upload the project to your Server
