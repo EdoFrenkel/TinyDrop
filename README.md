@@ -30,3 +30,7 @@ few things to notice:
 * before the script start the process it checks whether the every specific Dropbox folder actually exist
 * if an atlas have been compressed already by the script, it won't compress him again. you don't want to compress the same atlas few times by mistake.
 * smile :)
+
+Issues:
+* If you've got graphics with gradiant opacity it won't compress well, so you can put all those images in one atlas that will be left alone
+* If you find more issues please let me know...i'll update the docs
