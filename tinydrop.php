@@ -12,34 +12,33 @@ set_time_limit(0);
 require_once("lib/DropboxClient.php");
 
 $config = array(
-    // Define a username && password - without the correct username & password you cant start the process (which is a good thing!)
+    // Define a username && password - without the correct username & password you can't start the process (which is a good thing!)
     "username" => "USER_NAME",
     "password" => "PASSWORD",
     // Define Dropbox app data
     "dropboxAppKey" => "DROPBOX_APP_KEY",
     "dropboxAppSecret" => "DROPBOX_APP_SECRET",
-    // the path to dropbox folder
-    // for example if your folder is in: c:\project\Assets\SpriteCollection\COLLECTION_NAME
-    // define: project/Assets/SpriteCollection/
-    "dropboxPath" => "DROPBOX_PATH",
-    // the end of the dropbox folder - optional, if there's no need leave empty - ""
-    // if we'll take the last example: c:\project\Assets\SpriteCollection\COLLECTION_NAME Data\
-    // define: " Data/"
-    "dropboxPathEnd" => "DROPBOX_PATH_END",
-    // the name convension of the image
-    // keep the same name convention to your atlases or change the script
-    "imageName" => "IMAGE_NAME",
+    // Define your tinyPNG api key
+    "tinyPNGApiKey" => "TINYPNG_API_KEY",
     // the folder structure of the current project on your server
     // for example if your your project root is in: SERVER_ROOT/test/tinydrop/
     // you should define: "/test/tinydrop/"
     "serverPath" => "SERVER_PATH",
-    // Define your tinyPNG api key
-    "tinyPNGApiKey" => "TINYPNG_API_KEY"
-
+    // the path to Dropbox folder
+    // for example if your folder is in: c:\dropbox\project\Assets\SpriteCollection\COLLECTION_NAME
+    // define: project/Assets/SpriteCollection/
+    "dropboxPath" => "DROPBOX_PATH",
+    // the end of the Dropbox folder - optional, if there's no need leave it empty - ""
+    // if we'll take the last example: c:\dropbox\project\Assets\SpriteCollection\COLLECTION_NAME Data\
+    // define: " Data/"
+    "dropboxPathEnd" => "DROPBOX_PATH_END",
+    // the name convension of the image
+    // keep the same name convention to your atlases or change the script
+    "imageName" => "IMAGE_NAME"
 );
 
 /*
- * Here you will insert your folders names as they appear in the dropbox folder
+ * Here you will insert your folders names as they appear in the Dropbox folder
  * if you want insted to define image names change the script...
  * I use 2dToolkit so the name convention is Bla/Bla/{$Name} Data/atlas0.png
  * but you can change it as you like of course
@@ -57,7 +56,7 @@ $warning = "";
 $message = "";
 $error = "";
 
-// init dropbox API
+// init Dropbox API
 $dropbox = new DropboxClient(array(
     'app_key' => $config["dropboxAppKey"],
     'app_secret' => $config["dropboxAppSecret"],
@@ -69,7 +68,7 @@ $access_token = load_token("access");
 if (!empty($access_token)) {
     $dropbox->SetAccessToken($access_token);
 
-} elseif (!empty($_GET['auth_callback'])) // are we coming from dropbox's auth page?
+} elseif (!empty($_GET['auth_callback'])) // are we coming from Dropbox's auth page?
 {
     // then load our previosly created request token
     $request_token = load_token($_GET['oauth_token']);
@@ -83,7 +82,7 @@ if (!empty($access_token)) {
 
 // checks if access token is required
 if (!$dropbox->IsAuthorized()) {
-    // redirect user to dropbox auth page
+    // redirect user to Dropbox auth page
     $return_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME'] . "?auth_callback=1";
     $auth_url = $dropbox->BuildAuthorizeUrl($return_url);
     $request_token = $dropbox->GetRequestToken();
